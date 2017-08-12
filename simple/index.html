@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Ooyala sample</title>
+
+    <!-- Bootstrap -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+
+    <!-- This embed code automatically includes and packages standard Player V4 plugins. If you need a different mix of plugins, please use the Advanced embed option. To see the included plugins, please refer to this doc: http://help.ooyala.com/video-platform/concepts/pbv4_release_notes.html -->
+    <script src="//player.ooyala.com/core/ad808db406854091b8125817a2a72fa8"></script>
+    
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.2/html5shiv.js"></script>
+      <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+  </head>
+  <body>
+    <!-- Ooyala snippet-->
+    <!-- The following div will contain the instantiated player, and is identified by id -->
+    <div id='container' ></div>
+    <!-- Player parameter modify some basic player behaviors and looks -->
+      <script>
+        var playerParam = {
+          'autoplay':true,
+          'loop':true
+        };
+        OO.ready(function() {window.pp = OO.Player.create('container', 'piY2Q5YzE6D4qp5Yd7_hTrnwC54714Ka', playerParam);});
+        </script>
+
+    <!-- Ooyala snippet-->
+
+
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+  </body>
+</html>
