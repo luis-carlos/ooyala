@@ -80,7 +80,14 @@
                 <script>
                   var playerParam = {
                     'autoplay':true,
-                    'loop':true
+                    'loop':true,
+                    "skin": {
+                      "config": "//player.ooyala.com/static/v4/stable/4.15.7/skin-plugin/skin.json",
+                      "inline": {
+                        "startScreen": {"showDescription": false, "playIconStyle": {"color": "blue"}},
+                        "buttons": {"desktopContent":{"0": {"hide": true}}}
+                      }
+                    }
                   };
                   OO.ready(function() {window.pp = OO.Player.create('container', 'piY2Q5YzE6D4qp5Yd7_hTrnwC54714Ka', playerParam);});
                   </script>
