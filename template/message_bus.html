@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Ooyala Challenge</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="css/portfolio-item.css" rel="stylesheet">
+
+    <script src="//player.ooyala.com/static/v4/stable/4.15.7/core.min.js"></script>
+    <script src="//player.ooyala.com/static/v4/stable/4.15.7/video-plugin/main_html5.min.js"></script>
+    <script src="//player.ooyala.com/static/v4/stable/4.15.7/skin-plugin/html5-skin.min.js"></script>
+    <link rel="stylesheet" href="//player.ooyala.com/static/v4/stable/4.15.7/skin-plugin/html5-skin.min.css"/>
+
+    <!-- This embed code automatically includes and packages standard Player V4 plugins. If you need a different mix of plugins, please use the Advanced embed option. To see the included plugins, please refer to this doc: http://help.ooyala.com/video-platform/concepts/pbv4_release_notes.html -->
+    <script src="//player.ooyala.com/core/2120b33a75904569aed5109e14c16953"></script>
+
+
+    <!-- Temporary navbar container fix -->
+    <style>
+    .navbar-toggler {
+        z-index: 1;
+    }
+
+    @media (max-width: 576px) {
+        nav > .container {
+            width: 100%;
+        }
+    }
+    </style>
+
+</head>
+
+<body>
+
+    <!-- Navigation -->
+    <nav class="navbar fixed-top navbar-toggleable-md navbar-inverse bg-inverse">
+        <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarExample" aria-controls="navbarExample" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="container">
+            <a class="navbar-brand" href="#">Start Bootstrap</a>
+            <div class="collapse navbar-collapse" id="navbarExample">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item active">
+                        <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">About</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Services</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Contact</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Page Content -->
+    <div class="container">
+
+        <!-- Portfolio Item Heading -->
+        <h1 class="my-4">Page Heading <small>Secondary Text</small></h1>
+
+        <!-- Portfolio Item Row -->
+        <div class="row">
+
+            <div class="col-md-8">
+              <!-- Ooyala snippet-->
+              <!-- The following div will contain the instantiated player, and is identified by id -->
+              <div id='container' ></div>
+              <div>
+                <button type="button" onclick="window.pp.play();">Play</button>
+                <button type="button" onclick="window.pp.pause();">Pause</button>
+                <button type="button" onclick="window.pp.setVolume(0)">Mute</button>
+                <button type="button" onclick="window.pp.setVolume(1)">Unmute</button>
+              </div>
+              <div>
+                <button type="button" onclick="alert(window.pp.getDescription());">Description</button>
+                <button type="button" onclick="alert(window.pp.getPlayheadTime().toFixed(2) + ' seconds.');">Playhead time</button>
+                <button type="button" onclick="alert(window.pp.isPlaying() ? 'Yes' : 'No');">Is it playing?</button>
+                <button type="button" onclick="alert(window.pp.getDuration().toFixed(2) + ' seconds.');">Duration</button>
+                <button type="button" onclick="alert(window.pp.isFullscreen() ? 'Yes' : 'No');">Is it full screen?</button>
+              </div>
+
+              <!-- Player parameter modify some basic player behaviors and looks -->
+                <script>
+                  /*
+                   * Use this to control playing state messages.
+                   */
+                  justStartedPlaying = true;
+
+                  /*
+                   * Always add event listeners and error handling
+                   * within the onCreate() function.
+                   * Include this function in the embedded parameters
+                   * in the Player.create() call.
+                   */
+                  function onCreate(player) {
+
+                      /*
+                       * Subscribe to all events:
+                       * this allows you to create logic
+                       * based on multiple events.
+                       */
+                       player.mb.subscribe("*" , 'example', function(eventName) {
+                           if (eventName != OO.EVENTS.DOWNLOADING &&
+                               eventName != OO.EVENTS.PLAYHEAD_TIME_CHANGED)
+                                console.log(eventName);
+                           if (eventName == OO.EVENTS.BUFFERED){
+                             $("#messagesText").val("Video has been buffered");
+                             alert("Video has been buffered");
+                           }
+                           if (eventName == OO.EVENTS.PAUSED){
+                             alert("Video has been paused");
+                           }
+                           if (eventName == OO.EVENTS.VIDEOPLAYED || eventName == OO.EVENTS.PLAYED) {
+                             alert("We hope you enjoyed the show!");
+                             window.location.href = "https://www.youtube.com/watch?v=KypeM8kx8cI";
+                           }
+                      });
+                  }
+
+                  var playerParam = {
+                    'autoplay':true,
+                    'loop':true,
+                    'skin': {
+                      'config': "//player.ooyala.com/static/v4/stable/4.15.7/skin-plugin/skin.json",
+                      'inline': {
+
+                      },
+                    'onCreate':'window.onCreate($this)'
+                    }
+                  };
+                  OO.ready(function() {
+                      window.pp = OO.Player.create('container', 'piY2Q5YzE6D4qp5Yd7_hTrnwC54714Ka', {
+                        skin: {
+                          config:"//player.ooyala.com/static/v4/stable/4.15.7/skin-plugin/skin.json"
+                        },
+                        onCreate:window.onCreate
+
+                      });
+                  });
+                  </script>
+
+              <!-- Ooyala snippet-->
+            </div>
+
+            <div class="col-md-4">
+                <h3 class="my-3">Rockstar Sebastian</h3>
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam viverra euismod odio, gravida pellentesque urna varius vitae. Sed dui lorem, adipiscing in adipiscing et, interdum nec metus. Mauris ultricies, justo eu convallis placerat, felis enim.</p>
+                <h3 class="my-3">Project Details</h3>
+                <ul>
+                    <li>Lorem Ipsum</li>
+                    <li>Dolor Sit Amet</li>
+                    <li>Consectetur</li>
+                    <li>Adipiscing Elit</li>
+                </ul>
+            </div>
+
+        </div>
+        <!-- /.row -->
+
+        <!-- Related Projects Row -->
+        <div class="row">
+            Messages: <input type="text" id="messagesTxt" size="108" value=" ">
+        </div>
+
+        <h3 class="my-4">Related Projects</h3>
+
+        <div class="row">
+
+            <div class="col-md-3 col-sm-6 mb-4">
+                <a href="#">
+                    <img class="img-fluid" src="http://placehold.it/500x300" alt="">
+                </a>
+            </div>
+
+            <div class="col-md-3 col-sm-6 mb-4">
+                <a href="#">
+                    <img class="img-fluid" src="http://placehold.it/500x300" alt="">
+                </a>
+            </div>
+
+            <div class="col-md-3 col-sm-6 mb-4">
+                <a href="#">
+                    <img class="img-fluid" src="http://placehold.it/500x300" alt="">
+                </a>
+            </div>
+
+            <div class="col-md-3 col-sm-6 mb-4">
+                <a href="#">
+                    <img class="img-fluid" src="http://placehold.it/500x300" alt="">
+                </a>
+            </div>
+
+        </div>
+        <!-- /.row -->
+
+    </div>
+    <!-- /.container -->
+
+    <!-- Footer -->
+    <footer class="py-5 bg-inverse">
+        <div class="container">
+            <p class="m-0 text-center text-white">Copyright &copy; Your Website 2017</p>
+        </div>
+        <!-- /.container -->
+    </footer>
+
+    <!-- Bootstrap core JavaScript -->
+    <script src="vendor/jquery/jquery.min.js"></script>
+    <script src="vendor/tether/tether.min.js"></script>
+    <script src="vendor/bootstrap/js/bootstrap.min.js"></script>
+
+</body>
+
+</html>
