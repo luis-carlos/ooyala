@@ -36,6 +36,11 @@
             width: 100%;
         }
     }
+
+    .img-fluid{
+        width: 255px;
+        height: 143px;
+    }
     </style>
 
 </head>
@@ -97,6 +102,52 @@
 
               <!-- Player parameter modify some basic player behaviors and looks -->
                 <script>
+                  function changeName(text_arg){
+                    alert(text_arg);
+                    // First try
+                    $.ajax({
+                        url : 'https://api.ooyala.com/v2/assets/piY2Q5YzE6D4qp5Yd7_hTrnwC54714Ka?api_key=psZGsyOs7FZ4JDrLOCEOlna2K8vO.FaOUg&signature=ph7UjmWJVCPdRduT8YR%2F4rmHqTnBTNpgvBzuXoeJ4MQ&expires=1502876085',
+                        data : {'name':'Atom'},
+                        type : 'PATCH',
+                        contentType : 'application/json',
+                        xhr: function() {
+                            return window.XMLHttpRequest == null || new window.XMLHttpRequest().addEventListener == null
+                                ? new window.ActiveXObject("Microsoft.XMLHTTP")
+                                : $.ajaxSettings.xhr();
+                        }
+                    });
+
+                    // Second try
+                    /*$.ajax({
+                        headers : {
+                            'Accept' : 'application/json',
+                            'Content-Type' : 'application/json'
+                        },
+                        url : 'https://api.ooyala.com/v2/assets/piY2Q5YzE6D4qp5Yd7_hTrnwC54714Ka?api_key=psZGsyOs7FZ4JDrLOCEOlna2K8vO.FaOUg&signature=OKsV3tb4rRy%2BhdzrnBTl%2BOPJSufA%2FdbCNDRTnwW3rQk&expires=1502867393',
+                        type : 'PATCH',
+                        success : function(response, textStatus, jqXhr) {
+                            console.log("Venue Successfully Patched!");
+                        },
+                        error : function(jqXHR, textStatus, errorThrown) {
+                            // log the error to the console
+                            console.log("The following error occured: " + textStatus, errorThrown);
+                        },
+                        complete : function() {
+                            console.log("Venue Patch Ran");
+                        }
+                    });*/
+
+
+                    // Third try
+                    /*var request = new XMLHttpRequest();
+                    request.open('PATCH', 'https://api.ooyala.com/v2/assets/piY2Q5YzE6D4qp5Yd7_hTrnwC54714Ka?api_key=psZGsyOs7FZ4JDrLOCEOlna2K8vO.FaOUg&signature=OKsV3tb4rRy%2BhdzrnBTl%2BOPJSufA%2FdbCNDRTnwW3rQk&expires=1502867393', false);
+                    request.setRequestHeader("Content-type","application/json");
+                    //request.setRequestHeader("Access-Control-Allow-Origin","*");
+
+                    request.send({"name": "JSON"});*/
+                    alert("Name changed");
+                  }
+
                   /*
                    * Use this to control playing state messages.
                    */
@@ -178,20 +229,25 @@
             Messages: <input type="text" id="messagesTxt" size="108" value=" ">
         </div>
 
+        <div class="row">
+            Change video name to: <input type="text" id="videoNameTxt" size="108" value=" "><button type="button" id="videoNameBtn">Update</button>
+
+        </div>
+
         <h3 class="my-4">Related Projects</h3>
 
         <div class="row">
 
             <div class="col-md-3 col-sm-6 mb-4">
-                <a href="#">
-                    <img class="img-fluid" src="http://placehold.it/500x300" alt="">
+                <a href="#" id="secondary">
+                    <img class="img-fluid" src="img/seb_bateria_2_thumbnail.jpg" alt="" >
                 </a>
             </div>
 
             <div class="col-md-3 col-sm-6 mb-4">
-                <a href="#">
-                    <img class="img-fluid" src="http://placehold.it/500x300" alt="">
-                </a>
+              <a href="#" id="third">
+                  <img class="img-fluid" src="img/seb_bateria_1_thumbnail.jpg" alt="" >
+              </a>
             </div>
 
             <div class="col-md-3 col-sm-6 mb-4">
@@ -224,6 +280,17 @@
     <script src="vendor/jquery/jquery.min.js"></script>
     <script src="vendor/tether/tether.min.js"></script>
     <script src="vendor/bootstrap/js/bootstrap.min.js"></script>
+    <script>
+      $('#videoNameBtn').click(function(){changeName($("#videoNameTxt").val());});
+      $('#secondary').click(function(){
+        window.pp.setEmbedCode('Npc3c5YzE6BI-MjRnoMl5za2H43eLDDy');
+        return false;
+      });
+      $('#third').click(function(){
+        window.pp.setEmbedCode('piY2Q5YzE6D4qp5Yd7_hTrnwC54714Ka');
+        return false;
+      });
+    </script>
 
 </body>
 
